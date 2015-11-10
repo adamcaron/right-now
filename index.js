@@ -1,4 +1,3 @@
-// what node is running ... could be called 'server.js'
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
@@ -13,18 +12,17 @@ app.get('/', function (req, res){
 });
 
 io.on('connection', function (socket) {
+  // do somehting when user connects
   console.log('Someone has connected.');
-  var count = 0;
-  var interval = setInterval(function () {
-    socket.emit('message', {user: 'turingbot', text: 'Hello, world! ' + count++});
-  }, 500);
 
+  // do something when we hear from the user
   socket.on('message', function (channel, message) {
     console.log(channel + ': ', message);
   });
 
+  // do something when user disconnects
   socket.on('disconnect', function () {
-    clearInterval(interval);
+    // Something here later.
   });
 });
 
