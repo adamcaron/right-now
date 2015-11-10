@@ -19,6 +19,10 @@ io.on('connection', function (socket) {
     socket.emit('message', {user: 'turingbot', text: 'Hello, world! ' + count++});
   }, 500);
 
+  socket.on('message', function (channel, message) {
+    console.log(channel + ': ', message);
+  });
+
   socket.on('disconnect', function () {
     clearInterval(interval);
   });
