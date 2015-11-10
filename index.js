@@ -12,6 +12,7 @@ app.get('/', function (req, res){
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
+// on connention, do this thing, and it will be given an instance of 'socket'
 io.on('connection', function (socket) {
   console.log('Someone has connected.');
 });
