@@ -3,6 +3,8 @@
 const express = require('express'); // get express, the sinatra of JavaScript.
 const app = express(); // instantiate it
 const http = require('http').Server(app); // pass it to my http library
+// pass the instance of my server to the socket.io library and ... MAGIC
+// Socket.io is both a erverside library and a clientside library
 const io = require('socket.io')(http); // library for websockets: jQuery for websockets -- it papers over chrome's, safari's, and firefox's implementations.
 
 const path = require('path');
