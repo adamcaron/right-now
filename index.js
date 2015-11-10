@@ -12,9 +12,13 @@ app.get('/', function (req, res){
   res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
-// on connention, do this thing, and it will be given an instance of 'socket'
 io.on('connection', function (socket) {
   console.log('Someone has connected.');
+  // the connection happens
+  // emit a message. Socket.io includes the 'eventEmitter' library
+  // the socket will now send a message over
+  // to this indivudual browser (in scope as 'socket', which was passed in).
+  socket.emit('message', {user: 'turingbot', text: 'Hello, world!'});
 });
 
 http.listen(process.env.PORT || 3000, function(){

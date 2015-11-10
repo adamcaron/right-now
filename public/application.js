@@ -1,6 +1,9 @@
-// will be the client-side code. ... could be called 'client.js'
-var socket = io(); // the socket.io library creates a global variable called 'io'
+var socket = io();
 
 socket.on('connect', function () {
   console.log('You have connected!');
+});
+
+socket.on('message', function (message) {
+  console.log('Something came along on the "message" channel:', message);
 });
