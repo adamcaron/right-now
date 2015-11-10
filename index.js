@@ -18,7 +18,17 @@ io.on('connection', function (socket) {
   // emit a message. Socket.io includes the 'eventEmitter' library
   // the socket will now send a message over
   // to this indivudual browser (in scope as 'socket', which was passed in).
-  socket.emit('message', {user: 'turingbot', text: 'Hello, world!'});
+
+  // lets shoot some stuff over the wire on a regular interval:
+  var count = 0;
+  var interval = setInterval(function () {
+    socket.emit('message', {user: 'turingbot', text: 'Hello, world! ' + count++});
+  }, 500);
+
+  // clean up after yourself! lest there be a terrible memory link.
+  socket.on('disconnect', function () {
+    clearInterval(interval);
+  });
 });
 
 http.listen(process.env.PORT || 3000, function(){
