@@ -1,3 +1,5 @@
+// what node is running ... like 'server.js'
+
 const express = require('express'); // get express, the sinatra of JavaScript.
 const app = express(); // instantiate it
 const http = require('http').Server(app); // pass it to my http library
