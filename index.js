@@ -1,18 +1,19 @@
-// what node is running ... like 'server.js'
-
-const express = require('express'); // get express, the sinatra of JavaScript.
-const app = express(); // instantiate it
-const http = require('http').Server(app); // pass it to my http library
-// pass the instance of my server to the socket.io library and ... MAGIC
-// Socket.io is both a erverside library and a clientside library
-const io = require('socket.io')(http); // library for websockets: jQuery for websockets -- it papers over chrome's, safari's, and firefox's implementations.
+// what node is running ... could be called 'server.js'
+const express = require('express');
+const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
 const path = require('path');
 
-app.use(express.static('public')); // grab all the files in the /public directory and serve them... this express server is just serving static assets
+app.use(express.static('public'));
 
 app.get('/', function (req, res){
   res.sendFile(path.join(__dirname, '/public/index.html'));
+});
+
+io.on('connection', function (socket) {
+  console.log('Someone has connected.');
 });
 
 http.listen(process.env.PORT || 3000, function(){
