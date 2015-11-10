@@ -12,17 +12,23 @@ app.get('/', function (req, res){
 });
 
 io.on('connection', function (socket) {
-  // do somehting when user connects
+  // When a user connects.
   console.log('Someone has connected.');
+  // Broadcast a message to all of the other clients connected
+  // announcing that someone new has connected.
+  socket.broadcast.emit('message', {user: 'turingbot', text: 'You can do the thing.'});
+  io.sockets.emit('message', {user:'has conneted!', text: 'new connection'});
 
-  // do something when we hear from the user
+  // When a message comes in from a user.
   socket.on('message', function (channel, message) {
     console.log(channel + ': ', message);
+    // Broadcast it out to all users.
   });
 
-  // do something when user disconnects
+  // When a user disconnects.
   socket.on('disconnect', function () {
-    // Something here later.
+    // Broadcast a message to all of the other clients connected
+    // announcing that someone new has disconnected.
   });
 });
 
