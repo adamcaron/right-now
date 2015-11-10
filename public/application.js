@@ -3,7 +3,7 @@ var socket = io();
 socket.on('connect', function () {
   console.log('You have connected!');
 
-  socket.send('bacon', {
+  socket.send('New user connected', {
     username: 'Adam',
     text: 'I did the thing.'
   });
